@@ -1,0 +1,740 @@
+/*====  RESET ============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /*modifica a maneira de ver o tamanho de uma caixa para escolher como as caixas podem ser modificadas no css... conta a partir da borda e todos elementos border e padding tem que caber no tamanho da caixa 100%...então ele soma as propriedades mas mantem no limite ou seja a caixa nao extrapola*/
+}
+
+ul {
+  list-style: none; /*retira a lista ou pontos*/
+}
+
+a {
+  text-decoration: none; /*tira todas as linhas de links da pagina*/
+}
+
+img {
+  width: 100%; /*para a imagem se adaptar a pagina*/
+  height: auto;
+}
+
+/*====  VARIABLES ============================ */
+:root {
+  --header-height: 4.5rem;
+
+  /* colors */
+  --hue: 159;
+  /* HSL color mode */
+  --title-color: hsl(0 86% 52%); /*vermelho*/
+  --base-color: hsl(0 0% 100%); /*branco*/
+  --bottom-color: hsl(var(--hue) 36% 57%); /*verde mais escuro*/
+  --base-color-second: hsl(var(--hue) 65% 88%); /*verde mais claro*/
+  --border-color: hsl(298 61% 48%); /*violeta*/
+  --base-color-alt: hsl(var(--hue) 57% 53%); /*verde mais claro*/
+  --text-color: hsl(0 0% 46%); /*cinza*/
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 0%); /*preto*/
+
+  /* fonts */
+  --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: 'Poppins', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
+}
+
+/*===  BASE ============================ */
+html {
+  scroll-behavior: smooth; /*é rolagem suave.. quando clica no conteudo do menu ele rola a pagina de modo suave*/
+}
+
+body {
+  font: 400 1rem var(--body-font); /*font size é o tamanho*/ /*no ajuste foi colocado body font no lugar de dm sans... */
+  color: var(--text-color); /*cor do p*/
+  background: var(--body-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+.title {
+  font: 700 var(--title-font-size) var(--title-font);
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
+}
+
+/*é o botão agendar um horario*/
+.button {
+  font: 500 1rem var(--body-font);
+  background-color: var(--bottom-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex; /*deixa na mesma linha do tamanho do conteudo.. o flex permite abilitar mexer nos elementos */
+  align-items: center;
+  padding: 0 2rem; /*0 em cima e 2 nas laterais*/
+  border-radius: 0.25rem; /*arredondamento na borda*/
+  transition: background 0.3s; /*suavidade em relação a mudança de cor*/
+}
+
+/*hover é quando passar o mause em cima muda de cor*/
+.button:hover {
+  background: var(--base-color-alt);
+}
+
+.divider-1 {
+  height: 1px;
+  background: linear-gradient(
+    /*é mudança ..esta recebendo um valor que tem 3 propriedades dentro*/ 270deg,
+    hsla(var(--hue), 36%, 57%, 1),
+    hsla(var(--hue), 65%, 88%, 0.34)
+  );
+}
+
+.divider-2 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 65%, 88%, 0.34),
+    hsla(var(--hue), 36%, 57%, 1)
+  );
+}
+
+/*====  LAYOUT ============================ */
+/*layout é para posicionar os elementos na tela.. */
+/*container é para ter limites de espaço na pagina*/
+.container {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+/*colocou o calc do main aqui, colocou 4.5 do header*/
+.section {
+  padding: calc(5rem + var(--header-height)) 0;
+}
+
+.section .title {
+  margin-bottom: 1rem;
+}
+
+.section .subtitle {
+  font-size: var(--subtitle-font-size);
+}
+.section header {
+  margin-bottom: 4rem;
+}
+
+/* é a cor do p playimports em baixo do services */
+.section header strong {
+  color: var(--base-color);
+}
+
+#header {
+  border-bottom: 1px solid #e4e; /*é a linha em baixo do header*/
+  margin-bottom: 2rem;
+  display: flex; /*so com o flex tem quebra de linha igual o block mas se colocar inline + flex ou block ai não tem*/ /*I e B modifica so os elementos e nao os filhos ja o I e F modifica os dois */
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--body-color);
+  width: 100%;
+}
+
+#header.scroll {
+  box-shadow: 0px 0px 12px rgba(246, 21, 21, 0.794); /*é a sombra da linha do header*/
+}
+
+/*====  LOGO ============================ */
+.logo {
+  font: 700 1.31rem var(--title-font);
+  color: var(--title-color);
+}
+
+.logo span {
+  color: var(--base-color);
+}
+
+.logo-alt span {
+  color: var(--body-color);
+}
+
+/*====  NAVIGATION ============================ */
+nav {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/*é o conteudo do menu*/
+nav ul li {
+  text-align: center;
+}
+
+nav ul li a {
+  transition: color 0.2s; /*para ser suave.. aplica para tudo o elemento de transição.. para nao fazer isso coloca o color para ser especifico so no color*/
+  position: relative; /*ligado ao absoluto*/
+}
+
+/*é a cor que aparece quando passa o mause no conteudo do menu, que no caso é branco*/
+nav ul li a::after {
+  content: ''; /*é o traço*/
+  width: 0%; /*sem isso o traço fica aparecendo e nao some entap coloco para sumir*/
+  height: 2px;
+  background: var(--base-color);
+
+  position: absolute; /*absolute em relação ao relative..em relação ao conteudo do menu ..todos que estão em li a */ /*sem isso o traço fica em outro lugar da pagina*/
+  left: 0;
+  bottom: -1.5rem; /*joga em baixo da letra de e sem ele o traço fica em cima*/
+
+  transition: width 0.2s; /*para o traço crescer na tela*/
+}
+
+/*cor ativa quando passa o mause em cima.. do sobre services e etc e quando estiver no active ele tambem faz o hover..*/
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--base-color);
+}
+
+/*largura do tracinho quando fizer o hover e tambem quando estiver ativo*/
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+
+/*é a cor violeta do menu e close quando passa o mause e com transform se move para cima com suavidade em um eixo y vertical */
+nav .icon-close:hover,
+nav .icon-menu:hover {
+  color: var(--border-color);
+  transform: translateY(-8px);
+  transition: 0.3s;
+}
+
+/*para esconder o menu*/
+nav .menu {
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition: 0.2s;
+}
+
+/*o conteudo do swol some*/
+nav .menu ul {
+  display: none;
+}
+
+/* Mostrar menu ...vai procurar o menu no show*/
+nav.show .menu {
+  opacity: 1;
+  visibility: visible;
+
+  background: var(--body-color);
+
+  height: 100vh; /*é a altura do dispositivo..altura total...tem haver com viewport*/
+  width: 100vw; /*é a largura total do dispositivo... tem haver com viewport que é largura e altura do dispositivo*/
+
+  position: fixed; /*para fixar a pagina show*/
+  top: 0; /*todos elementos vão ficar no topo esquerdo do dispositivo*/
+  left: 0; /*fica tudo na lado esquerdo */
+
+  /*da espaço entre eles e com o center joga no meio*/
+  display: grid;
+  place-content: center; /*joga o conteudo no centro*/
+}
+
+nav.show .menu ul {
+  display: grid;
+}
+
+/* espaço entre os elementos do show */
+nav.show ul.grid {
+  /*vai ser grid so quando for show*/
+  gap: 4rem;
+}
+
+/* toggle menu */
+/*se refere ao icone menu e close*/
+.toggle {
+  /*toggle significa troca entre liga e desliga... se eu clico no menu que esta ligado entao ele desliga e vai para show que ficara ligado e vice versa*/
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer; /*coloca a mão quando passar o mause no menu e close */
+}
+
+/*é o icone x*/
+nav .icon-close {
+  visibility: hidden; /*começa escondendo o close */
+  opacity: 0;
+
+  position: absolute; /*com isso o close aparece no dispositivo*/
+  top: -1.5rem;
+  right: 1.5rem;
+
+  transition: 0.2s;
+}
+
+nav.show div.icon-close {
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
+}
+
+/*====  HOME ============================ */
+#home {
+  overflow: hidden; /*para não deixar o conteudo vazar na tela */
+}
+
+#home .container {
+  margin: 0;
+}
+
+#home .image {
+  position: relative;
+}
+
+#home .image::before {
+  /*elemento ficticio..sig. antes do conteudo crua uma img fantasma*/
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -16.8%; /*esta no video 1 em + ou - 2:03 ...regra de 3... 68*100/405*/
+  left: 16.7%; /*regta de 3...*/
+  z-index: 0;
+}
+
+#home .image img {
+  position: relative;
+  right: 2.93rem;
+}
+
+#home .image img,
+#home .image::before {
+  border-radius: 0.25rem;
+}
+
+#home .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#home .text h2 {
+  margin-bottom: 1rem;
+}
+
+#home .text p {
+  margin-bottom: 2rem;
+}
+
+/*====  ABOUT ============================ */
+#about {
+  background: var(--body-color);
+}
+
+#about .container {
+  margin: 0; /*tira todas as margins*/ /*todas as partes grudam na tela*/
+}
+
+/*essa img não tem espaços laterais*/
+#about .image {
+  position: relative; /*é a img 1 para ficar de forma relativa a img 2*/
+}
+
+/* é a img 2  */
+#about .image::before {
+  /*elemento ficticio*/
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -8.3%; /*foi feito regra de tres e pegou as medidas do grande no figma... 581 largura e 192 deslocamento..192*100/581=33  405 de altura e 34 de deslocamento  34*100/405=8.3*/
+  left: -33%;
+  z-index: 0; /*para colocar a img na frente de outra ou atras*/
+}
+
+#about .image img {
+  position: relative;
+}
+
+#about .image img,
+#about .image::before {
+  border-radius: 0.25rem;
+}
+
+/*não tem alinhamento ao centro*/
+#about .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/*====  SERVICES ============================ */
+.cards.grid {
+  gap: 1.5rem; /*espaço entre cards*/
+}
+
+.card {
+  padding: 3.625rem 2rem; /*em cima e baixo 3 de laterais 2*/
+  box-shadow: 0px 0px 12px rgba(246, 21, 21, 0.794); /*sombra*/
+  border-bottom: 0.25rem solid var(--border-color); /*linha violeta de baixo*/
+  border-radius: 0.25rem 0.25rem 0 0; /*borda só em cima e 00 em baixo*/
+  text-align: center; /*alinhamento ao meio*/
+}
+
+/*é o icone*/
+.card i {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 5rem;
+  color: var(--base-color);
+}
+
+.card .title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/*====  TESTIMONIALS ============================ */
+#testimonials {
+  background: var(--body-color);
+}
+
+/* trouce o depoimento tudo encostado */
+#testimonials .container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/*caixa do titulo*/
+#testimonials header {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0;
+}
+
+/*blockquote é a caixa que da significado...caixa de alguem que fala e que não sou eu*/
+#testimonials blockquote {
+  padding: 2rem;
+  box-shadow: 0px 0px 12px rgba(246, 21, 21, 0.794); /*sombra em volta do islde*/
+  border-radius: 0.25rem;
+}
+
+#testimonials blockquote p {
+  position: relative; /*relative ao abso..*/
+  text-indent: 1.875rem; /*da um espaço de um paragrafo no texto*/
+  margin-bottom: 1.5rem;
+  color: var(--text-color); /*cor do paragrafo*/
+}
+
+/*é o elemento " */
+#testimonials blockquote p span {
+  font: 700 2.5rem serif; /* serif é para qualquer fonte que estiver no meu computador*/
+  position: absolute; /*esta absoluto em relação ao relative do paragrafo.. assim fica perto do p e nao em outro lugar da pagina*/
+  top: -0.375rem; /*para alinhalo do lado do paragrafo ... para ir para baixo coloco - */
+  left: -1.875rem; /*para vir para direita eu coloco - */
+  /*para ir um pouco para direita coloco -*/
+  color: var(--border-color);
+}
+
+/*é o nome */
+#testimonials cite {
+  display: flex; /*para alinhar*/
+  align-items: center;
+  font-style: normal; /*para ficar parecido com o figma*/
+}
+
+#testimonials cite img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover; /*para cobrir todo espaço que tiver dentro dessa teg*/
+  clip-path: circle(); /*cria  uma mascara circular*/
+  margin-right: 0.5rem; /*separação pequena entre a img e o nome */
+}
+
+/* swiper */
+/*é os slides*/
+.swiper-slide {
+  height: auto;
+  padding: 4rem 1rem;
+}
+
+/*sem isso o elemento para passar os slides vão para cima, la no home*/ /*é a bolinha*/
+.swiper-pagination {
+  position: relative;
+}
+
+.swiper-pagination-bullet {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/*a cor da bolinha*/
+.swiper-pagination-bullet-active {
+  background: var(--border-color);
+}
+
+/*====  CONTACT ============================ */
+#contact .grid {
+  gap: 4rem;
+}
+
+#contact .text p {
+  margin-bottom: 2rem;
+}
+
+/*button i é o what e os outros icones*/
+#contact .button i,
+#contact ul li i {
+  font-size: 1.5rem;
+  margin-right: 0.625rem;
+}
+
+/*espaço entre os icones*/
+#contact ul.grid {
+  gap: 2rem;
+}
+
+/*alinhamento dos icones*/
+#contact ul li {
+  display: flex;
+  align-items: center;
+}
+
+/*cor dos icones*/
+#contact ul li i {
+  color: var(--title-color);
+}
+
+/*====  FOOTER ============================ */
+footer {
+  background: var(--bottom-color);
+}
+
+footer.section {
+  padding: 4rem 0; /*é 4 de em cima e em baixo e 0 nas laterais*/
+}
+
+footer .logo {
+  display: inline-block; /*só inline - eu não tenho opção de colocar margin bottom mas com block sim...o logo é um elemento a enatao é inline entao coloco block*/
+  margin-bottom: 1.5rem;
+  color: var(--title-color);
+}
+
+footer .logo span {
+  color: var(--base-color);
+}
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem; /*o espaço é 12*/
+}
+
+/*é o icone*/
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+}
+
+/* para que os icones fiquem em linha */
+footer .social {
+  grid-auto-flow: column; /*fluir automaticamente como coluna*/
+  width: fit-content; /*ai a caixa fica do mesmo tamanho do icone ..fica um do lado do outro com espaço correto*/
+}
+
+/*mexer no icone quando passar o mause */
+footer .social a {
+  /*outra possibilidade era display flex e gap de 2rem ... joga um do lado do outro*/
+  /* margin-right: 2rem; */ /*foi retirado no ajuste e colocado grid em footer na div social no html e os icones ficaram um embaixo do outro*/
+  transition: 0.3s; /*suavizar*/
+  display: inline-block; /* o link a é sempre display inline e não recebe o translate... então coloco inline block porque adiciona propriedade assim mexe quando coloco o mause em cima*/
+}
+
+footer .social a:hover {
+  /*para quando passar o mause em cima*/
+  transform: translateY(-8px);
+}
+
+/* Back to top */
+
+/*icone da setinha*/
+.back-to-top {
+  background: var(--bottom-color);
+  color: var(--text-color-light);
+
+  position: fixed; /*fica fixo na pagina*/
+  right: 1rem;
+  bottom: 1rem;
+
+  padding: 0.5rem;
+  clip-path: circle(); /*arredonda ou cria um circulo em volta da seta*/
+  font-size: 1.5rem; /*tamanho da fonte*/
+  line-height: 0; /*tira qualquer tipo de linha*/
+  visibility: hidden; /*esconde a seta*/
+  opacity: 0;
+
+  transition: 0.3s; /*suavidade*/
+  transform: translateY(
+    100%
+  ); /*o 100% é o movimento.. transform é propriedade que aceita muitas outras.. translate serve para mexer no eixo x e y e quero o y que é o eixo vertical porque quero trazelo de baixo para cima*/
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0); /*posição inicial dele*/
+}
+
+/*========= MEDIA QUERIES =========*/
+/* esta lincado ao html, na linha da viewport */
+/* extra large devices: 1200 > */
+@media (min-width: 1200px) {
+  /*reusable classes*/
+  .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section {
+    padding: 10rem 0; /*10 em cima e 0 laterais*/ /*é 160/16 = 10rem*/
+  }
+
+  /*se refere ao header do services e do testimonials*/
+  .section header,
+  #testimonials header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button {
+    height: 3.125rem; /*50/16=3.125 é um ajuste*/
+  }
+
+  /*---LAYOUT---*/
+  /*foi colocado calc e +2rem... depois ajuste e deixou apenas o var*/
+  main {
+    margin-top: var(--header-height);
+  }
+
+  /*------navigation--------*/
+  /*se refere ao conteudo do menu*/
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  /*um ao lado do outro com espaço de 2rem*/
+  nav .menu ul {
+    display: flex; /*deixa um ao lado do outro o flex diferente do grid que por padrão coloca um embaixo do outro*/
+    gap: 2rem;
+  }
+
+  /*é o title do sobre services e etc..*/
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
+    /*antialiased é para deixar a font mais lisa*/
+  }
+
+  /*é os titulos inicio sobre serviços e etc o bold é quando estiver active ai mexe na cor e no traço*/
+  nav .menu ul li a.title.active {
+    /*assim deixa mais especifico*/
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none; /*para o menu sumir e as palavras ficam no canto esquerdo*/
+  }
+
+  /*----HOME----*/
+
+  /*para deixar um elemento ao lado do outro*/
+  #home .container {
+    grid-auto-flow: column; /*joga ao lado*/
+    /* width: fit-content; */ /*o fit possibilita ajustar ou agrupar ao tamanho do conteudo mas não foi utilizado aqui*/
+    justify-content: space-between; /*fica bem separado.. img separado de text*/
+    margin: 0 auto; /*0 em cima e auto nas laterais */
+  }
+
+  #home .image {
+    order: 1;
+    /*o texto fica em primeiro e essa ordem so é possivel porque tem o grid no html do home*/
+  }
+
+  #home .text {
+    order: 0;
+    max-width: 24rem; /*limite*/
+    text-align: left; /*para alinhar*/
+  }
+
+  /*----ABOUT----*/
+  /*é o container que tem o grid*/
+  #about .container {
+    margin: 0 auto; /*0 em cima e auto nas laterais e alinha ao meio*/
+    grid-auto-flow: column; /*joga como coluna*/
+  }
+
+  /*---SERVICES---*/ /*é um limite na caixa de 32 rem*/
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr; /*é colunas com numero flexivel de fração.. são as colunas terapia cortes etc...*/ /*mudando o numero a coluna fica maior ou menor.. caso queira dar algum destaque ao sevices*/
+  }
+
+  .card {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  /*---TESTIMONIALS---*/
+  /*para alinhar ao centro o header*/
+  #testimonials .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*---CONTACT---*/
+  #contact .container {
+    grid-auto-flow: column; /*coloca ao lado*/
+    align-items: center;
+  }
+
+  #contact .text {
+    max-width: 25rem; /*limite de largura*/
+  }
+
+  /*---FOOTER---*/
+  footer .section {
+    padding: 3.75rem 0; /*60/16=3.75*/
+  }
+
+  /* para mexer nos icones social */
+  footer .container {
+    grid-auto-flow: column; /*para jogar os icones social para o outro lado....é coluna */
+    align-items: center;
+    justify-content: space-between; /*joga para o canto*/
+  }
+
+  footer .logo {
+    font-size: 2.25rem; /*é o tamanho da logo playimports*/
+  }
+}
+/* large devices: 1023 > */
+/* large devices: 992 > */
+@media (min-width: 992px) {
+  /*@midia é uma regra então tudo que tiver @ vai receber uma regra ...min width é largura minima*/
+  :root {
+    --title-font-size: 2.2rem;
+    --subtitle-font-size: 1.125rem;
+  }
+}
+/* medium devices: 767 > */ /*é tablet*/
